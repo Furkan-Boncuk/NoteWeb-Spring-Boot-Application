@@ -1,4 +1,4 @@
-package com.furkanboncuk.NoteWeb.exceptionHandler;
+package com.furkanboncuk.NoteWeb.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +30,6 @@ public class NoteInformationException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NoteTitleException.class})
     public ResponseEntity<Object> noteException() {
-        return NoteTitleException.generateErrorResponse("The note title must not same with another note's title");
+        return NoteTitleException.generateErrorResponse("Note title must not be the same as the title of another note");
     }
 }

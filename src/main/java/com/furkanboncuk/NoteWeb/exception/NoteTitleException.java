@@ -1,11 +1,7 @@
-package com.furkanboncuk.NoteWeb.exceptionHandler;
+package com.furkanboncuk.NoteWeb.exception;
 
-import com.furkanboncuk.NoteWeb.entity.Note;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
