@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,9 +25,11 @@ public class Note {
     private long id;
     @Column(name="notes_title",nullable = false)
     @NotBlank(message="The 'title' field must not be left blank")
+    @Size(min = 1, max = 75, message = "The 'title' field is too long")
     private String title;
     @Column(name="notes_category",nullable = false)
     @NotBlank(message="The 'category' field must not be left blank")
+    @Size(min = 1, max = 75, message = "The 'category' field is too long")
     private String category;
     @CreationTimestamp
     @Column(name="notes_created_date",nullable = false)
