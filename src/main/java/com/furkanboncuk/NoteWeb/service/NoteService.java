@@ -1,22 +1,29 @@
 package com.furkanboncuk.NoteWeb.service;
 
 import com.furkanboncuk.NoteWeb.entity.Note;
-import com.furkanboncuk.NoteWeb.repository.NoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class NoteService {
+public interface NoteService {
 
-    private NoteRepository noteRepository;
+    //get
+    List<Note> findAllNotes();
+    //post
+    Note saveNote(Note note);
+    //delete
+    void deleteNoteById(Long id);
+    void deleteNoteByTitle(String title);
+    void deleteAllNotes();
 
-    @Autowired
-    public NoteService(NoteRepository theNoteRepository) {
-        this.noteRepository = theNoteRepository;
-    }
+    // search
+    Note getNoteById(Long id);
+    Note getNoteByTitle(String title);
+    Note getNoteByCategory(String category);
+
+    // sort
+    /*
+    List<Note> getNotesByCategoryAsc(String category);
+    List<Note> getNotesByCategoryDesc(String category);*/
 
 
 
