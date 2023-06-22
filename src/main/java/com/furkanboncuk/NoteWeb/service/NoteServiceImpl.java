@@ -5,6 +5,8 @@ import com.furkanboncuk.NoteWeb.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +14,10 @@ import java.util.Optional;
 public class NoteServiceImpl implements NoteService{
 
     private NoteRepository noteRepository;
-    //private EntityManager entityManager;
 
     @Autowired
-    public NoteServiceImpl(NoteRepository theNoteRepository/*, EntityManager entityManager*/) {
+    public NoteServiceImpl(NoteRepository theNoteRepository) {
         this.noteRepository=theNoteRepository;
-        //this.entityManager=entityManager;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public Optional<Note> getNoteById(Long id) {
-        return noteRepository.findNoteById(id);
+        return noteRepository.findById(id);
     }
 
     @Override
@@ -59,5 +59,20 @@ public class NoteServiceImpl implements NoteService{
     @Override
     public Note getNoteByCategory(String category) {
         return noteRepository.getNoteByCategory(category);
+    }
+
+    @Override
+    public List<Note> filterNoteByTitle(String title) {
+        return noteRepository.findByTitleContaining(title);
+    }
+
+    @Override
+    public List<Note> filterNoteByCategory(String category) {
+        return noteRepository.findNoteByCategoryContaining(category);
+    }
+
+    @Override
+    public List<Note> filterNoteByUpdatedDate(LocalDateTime updatedDate) {
+        return noteRepository.findNoteByUpdatedDateContaining(updatedDate);
     }
 }

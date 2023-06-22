@@ -2,6 +2,8 @@ package com.furkanboncuk.NoteWeb.service;
 
 import com.furkanboncuk.NoteWeb.entity.Note;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,11 @@ public interface NoteService {
     Optional<Note> getNoteById(Long id);
     Optional<Note> getNoteByTitle(String title);
     Note getNoteByCategory(String category);
+
+    // filter
+    List<Note> filterNoteByTitle(String title);
+    List<Note> filterNoteByCategory(String category);
+    List<Note> filterNoteByUpdatedDate(LocalDateTime updatedDate);
 
     // sort
     /*
