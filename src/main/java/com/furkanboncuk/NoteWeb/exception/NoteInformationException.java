@@ -30,7 +30,7 @@ public class NoteInformationException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NoteTitleException.class})
     public ResponseEntity<Object> noteTitleExc() {
-        return NoteTitleException.generateErrorResponse("Note title must not be the same as the title of another note");
+        return NoteTitleException.generateErrorResponse("Note title or Note content must not be the same as the another note");
     }
 
     @ExceptionHandler({NoteDoesNotExistException.class})
