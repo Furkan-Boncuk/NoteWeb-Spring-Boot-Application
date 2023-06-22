@@ -25,11 +25,11 @@ public class Note {
     private long id;
     @Column(name="notes_title",nullable = false)
     @NotBlank(message="The 'title' field must not be left blank")
-    @Size(min = 1, max = 75, message = "The 'title' field is too long")
+    @Size(min = 0, max = 100, message = "The 'title' field is too long")
     private String title;
     @Column(name="notes_category",nullable = false)
     @NotBlank(message="The 'category' field must not be left blank")
-    @Size(min = 1, max = 75, message = "The 'category' field is too long")
+    @Size(min = 0, max = 100, message = "The 'category' field is too long")
     private String category;
     @CreationTimestamp
     @Column(name="notes_created_date",nullable = false)
@@ -39,5 +39,6 @@ public class Note {
     private Date updatedDate;
     @Column(name="note_content", nullable = false)
     @NotBlank(message="The 'content' field must not be left blank")
+    @Size(min=0, max=10000, message = "The character limit is 10,000")
     private String content;
 }
