@@ -6,3 +6,7 @@ create table note(
                      notes_updated_date timestamp default current_timestamp,
                      note_content text
 );
+
+ALTER TABLE note
+ALTER COLUMN notes_title TYPE varchar(100),
+ALTER COLUMN notes_category TYPE varchar(100);
