@@ -3,6 +3,7 @@ package com.furkanboncuk.NoteWeb.service;
 import com.furkanboncuk.NoteWeb.entity.Note;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface NoteService {
 
@@ -16,8 +17,8 @@ public interface NoteService {
     void deleteAllNotes();
 
     // search
-    Note getNoteById(Long id);
-    Note getNoteByTitle(String title);
+    Optional<Note> getNoteById(Long id);
+    Optional<Note> getNoteByTitle(String title);
     Note getNoteByCategory(String category);
 
     // sort

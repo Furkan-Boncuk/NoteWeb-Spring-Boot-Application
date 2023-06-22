@@ -4,11 +4,13 @@ import com.furkanboncuk.NoteWeb.entity.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
     Note getNoteById(Long id);
-    Note getNoteByTitle(String title);
+    Optional<Note> findNoteByTitle(String title);
     Note getNoteByCategory(String category);
-    void deleteNoteByTitle(String title);
-    void deleteNoteById(Long id);
+    Optional<Note> findByTitle(String title);
+    Optional<Note> findNoteById(Long id);
 }

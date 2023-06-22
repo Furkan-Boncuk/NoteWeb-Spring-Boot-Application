@@ -2,7 +2,6 @@ package com.furkanboncuk.NoteWeb.service;
 
 import com.furkanboncuk.NoteWeb.entity.Note;
 import com.furkanboncuk.NoteWeb.repository.NoteRepository;
-import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +12,12 @@ import java.util.Optional;
 public class NoteServiceImpl implements NoteService{
 
     private NoteRepository noteRepository;
-    private EntityManager entityManager;
+    //private EntityManager entityManager;
 
     @Autowired
-    public NoteServiceImpl(NoteRepository theNoteRepository, EntityManager entityManager) {
+    public NoteServiceImpl(NoteRepository theNoteRepository/*, EntityManager entityManager*/) {
         this.noteRepository=theNoteRepository;
-        this.entityManager=entityManager;
+        //this.entityManager=entityManager;
     }
 
     @Override
@@ -33,14 +32,13 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public void deleteNoteById(Long id) {
-        Optional<Note> note = noteRepository.findById(id);
-        entityManager.remove(note);
+        noteRepository.deleteById(id);
     }
 
     @Override
     public void deleteNoteByTitle(String title) {
-        Optional<Note> note = Optional.ofNullable(noteRepository.getNoteByTitle(title));
-        entityManager.remove(note);
+        Optional<Note> note = noteRepository.findByTitle(title);
+        note.ifPresent(noteRepository::delete);
     }
 
     @Override
@@ -49,13 +47,13 @@ public class NoteServiceImpl implements NoteService{
     }
 
     @Override
-    public Note getNoteById(Long id) {
-        return noteRepository.getNoteById(id);
+    public Optional<Note> getNoteById(Long id) {
+        return noteRepository.findNoteById(id);
     }
 
     @Override
-    public Note getNoteByTitle(String title) {
-        return noteRepository.getNoteByTitle(title);
+    public Optional<Note> getNoteByTitle(String title) {
+        return noteRepository.findNoteByTitle(title);
     }
 
     @Override
