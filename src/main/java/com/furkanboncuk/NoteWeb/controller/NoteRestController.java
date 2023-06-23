@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.event.ListDataEvent;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -48,8 +49,8 @@ public class NoteRestController {
 
     // localhost:4000/notes/update/{id}
     @PutMapping("/update/byId/{id}")
-    public ResponseEntity<Note> updateNoteById(@Valid @PathVariable("id") Long id,
-                                               @RequestBody Note note) {
+    public ResponseEntity<?> updateNoteById(@Valid @PathVariable("id") Long id,
+                                               @RequestBody Note note) throws NoteTitleException{
         Note newNote = new Note();
         Optional<Note> oldNote = noteService.getNoteById(id);
 
@@ -69,8 +70,8 @@ public class NoteRestController {
 
     // localhost:4000/notes/update/{title}
     @PutMapping("/update/byTitle/{title}")
-    public ResponseEntity<Note> updateNoteByTitle(@Valid @PathVariable("title") String title,
-                                                  @RequestBody Note note) {
+    public ResponseEntity<Object> updateNoteByTitle(@Valid @PathVariable("title") String title,
+                                                  @RequestBody Note note) throws NoteTitleException{
         Note newNote = new Note();
         Optional<Note> oldNote = noteService.getNoteByTitle(title);
 
@@ -186,6 +187,44 @@ public class NoteRestController {
             //throw new NoteDoesNotExistException();
         }
     }
+
+    //localhost:4000/notes
+    @GetMapping
+    public ResponseEntity<List<Note>> getNotes(@RequestParam int pageNumber, @RequestParam int pageSize) {
+        return new ResponseEntity<>(noteService.getNotes(pageNumber,pageSize),HttpStatus.OK);
+
+    }
+
+    //localhost:4000/notes/sortByTitleASC
+    @GetMapping("/sortByTitleASC")
+    public ResponseEntity<?> getNotesByTitleSortingASCMethod(@RequestParam String title,
+                                                                      @RequestParam int pageNumber,
+                                                                      @RequestParam int pageSize) {
+
+        List<Note> searching = noteService.getNotesByTitleSortingASC(title,pageNumber,pageSize);
+        if(searching.isEmpty()) {
+            throw new NoteDoesNotExistException();
+        } else {
+            return new ResponseEntity<>(searching,HttpStatus.OK);
+        }
+
+    }
+
+    //localhost:4000/notes/sortByTitleDESC
+    @GetMapping("/sortByTitleDESC")
+    public ResponseEntity<?> getNotesByTitleSortingDESCMethod(@RequestParam String title,
+                                                                       @RequestParam int pageNumber,
+                                                                       @RequestParam int pageSize) {
+
+        List<Note> searching = noteService.getNotesByTitleSortingDESC(title,pageNumber,pageSize);
+        if(searching.isEmpty()) {
+            throw new NoteDoesNotExistException();
+        } else {
+            return new ResponseEntity<>(searching,HttpStatus.OK);
+        }
+    }
+
+
 
     /*
     //localhost:4000/filterNote/byUpdatedDate/{updatedDate}
