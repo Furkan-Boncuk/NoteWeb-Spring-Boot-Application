@@ -1,12 +1,15 @@
 package com.furkanboncuk.NoteWeb.service;
 
 import com.furkanboncuk.NoteWeb.entity.Note;
+import com.furkanboncuk.NoteWeb.repository.NotePaginationRepository;
 import com.furkanboncuk.NoteWeb.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,10 +17,12 @@ import java.util.Optional;
 public class NoteServiceImpl implements NoteService{
 
     private NoteRepository noteRepository;
+    private NotePaginationRepository notePaginationRepository;
 
     @Autowired
-    public NoteServiceImpl(NoteRepository theNoteRepository) {
-        this.noteRepository=theNoteRepository;
+    public NoteServiceImpl(NoteRepository noteRepository, NotePaginationRepository notePaginationRepository) {
+        this.noteRepository=noteRepository;
+        this.notePaginationRepository=notePaginationRepository;
     }
 
     @Override
@@ -75,4 +80,25 @@ public class NoteServiceImpl implements NoteService{
     public List<Note> filterNoteByUpdatedDate(LocalDateTime updatedDate) {
         return noteRepository.findNoteByUpdatedDateContaining(updatedDate);
     }
+
+    @Override
+    public List<Note> getNotes(int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC, "id");
+        return notePaginationRepository.findAll(pages).getContent();
+    }
+
+    @Override
+    public List<Note> getNotesByTitleSortingASC(String title, int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber,pageSize, Sort.Direction.ASC, "id");
+        return notePaginationRepository.findNoteByTitleContaining(title, pages);
+    }
+
+    @Override
+    public List<Note> getNotesByTitleSortingDESC(String title, int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber,pageSize, Sort.Direction.DESC, "id");
+        return notePaginationRepository.findNoteByTitleContaining(title, pages);
+    }
+
+
+
 }

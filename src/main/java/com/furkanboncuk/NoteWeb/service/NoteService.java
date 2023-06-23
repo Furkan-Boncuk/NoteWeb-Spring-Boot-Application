@@ -3,7 +3,6 @@ package com.furkanboncuk.NoteWeb.service;
 import com.furkanboncuk.NoteWeb.entity.Note;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,10 +27,19 @@ public interface NoteService {
     List<Note> filterNoteByCategory(String category);
     List<Note> filterNoteByUpdatedDate(LocalDateTime updatedDate);
 
-    // sort
-    /*
+    // jpa pagination and sorting
+    List<Note> getNotes(int pageNumber, int pageSize);
+    List<Note> getNotesByTitleSortingASC(String title,int pageNumber, int pageSize);
+    List<Note> getNotesByTitleSortingDESC(String title,int pageNumber, int pageSize);
+
+
+
+/*
+
     List<Note> getNotesByCategoryAsc(String category);
-    List<Note> getNotesByCategoryDesc(String category);*/
+    List<Note> getNotesByCategoryDesc(String category);
+
+ */
 
 
 
