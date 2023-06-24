@@ -1,6 +1,6 @@
-package com.furkanboncuk.NoteWeb.controller;
+package com.furkanboncuk.NoteWeb.restcontroller;
 
-import com.furkanboncuk.NoteWeb.entity.Note;
+import com.furkanboncuk.NoteWeb.modal.Note;
 import com.furkanboncuk.NoteWeb.exception.NoteDoesNotExistException;
 import com.furkanboncuk.NoteWeb.exception.NoteTitleException;
 import com.furkanboncuk.NoteWeb.service.NoteServiceImpl;
@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.event.ListDataEvent;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
