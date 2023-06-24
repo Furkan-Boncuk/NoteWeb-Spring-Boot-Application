@@ -1,6 +1,6 @@
 package com.furkanboncuk.NoteWeb.service;
 
-import com.furkanboncuk.NoteWeb.entity.Note;
+import com.furkanboncuk.NoteWeb.modal.Note;
 import com.furkanboncuk.NoteWeb.repository.NotePaginationRepository;
 import com.furkanboncuk.NoteWeb.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
