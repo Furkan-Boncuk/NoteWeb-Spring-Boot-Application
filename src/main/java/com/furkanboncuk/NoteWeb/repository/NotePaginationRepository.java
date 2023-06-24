@@ -1,8 +1,7 @@
 package com.furkanboncuk.NoteWeb.repository;
 
-import com.furkanboncuk.NoteWeb.entity.Note;
+import com.furkanboncuk.NoteWeb.modal.Note;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;

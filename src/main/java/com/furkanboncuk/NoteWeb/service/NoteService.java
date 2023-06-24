@@ -1,6 +1,6 @@
 package com.furkanboncuk.NoteWeb.service;
 
-import com.furkanboncuk.NoteWeb.entity.Note;
+import com.furkanboncuk.NoteWeb.modal.Note;
 
 import java.time.LocalDateTime;
 import java.util.List;
