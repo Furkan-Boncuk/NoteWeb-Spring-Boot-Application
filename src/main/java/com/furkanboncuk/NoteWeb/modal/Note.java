@@ -1,4 +1,4 @@
-package com.furkanboncuk.NoteWeb.entity;
+package com.furkanboncuk.NoteWeb.modal;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
